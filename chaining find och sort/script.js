@@ -31,7 +31,14 @@ let todos = [
 
 let todosEl = document.querySelector('#todos');
 
-let first = todos.forEach(function(todo) {
+
+let sortedTodos = todos.sort(function (a, b) {
+
+	if (a.description >b.description) {return +1}
+	else if (a.description < b.description) {return -1};
+}); 
+
+let first = sortedTodos.forEach(function(todo) {
 
 todoEl = document.createElement('li');
 
@@ -74,7 +81,7 @@ todosEl.addEventListener('click', function(e) {
 	
 	 content = e.target.innerText;
 	 e.target.remove();
-	  found = todos.find(function(todo) {
+	  found = sortedTodos.find(function(todo) {
 		if (todo.description = content)
 		{return true;}
 		else {return false;}})
@@ -85,7 +92,7 @@ doneEl.addEventListener('click', function(e) {
 	
 	let content = e.target.innerText;
 	e.target.remove();
-	let found = todos.find(function(todo) {
+	let found = sortedTodos.find(function(todo) {
 	if (todo.description = content)
 	{return true;}
 	else {return false;}})
@@ -106,7 +113,7 @@ createNewTodoButton.addEventListener('click', function() {
 
 	todoEl = document.createElement('li');
 	todoEl.innerHTML = newTodo.description;
-	todos.push(newTodo);
+	sortedTodos.push(newTodo);
 
 	todosEl.append(todoEl);
 });
