@@ -29,75 +29,66 @@ let todos = [
 
 
 
-let todosEl = document.querySelector('#todos');
+let todosEl = document.querySelector('.listor');
+let undoneEl = document.querySelector('#undone');
+let doneEl = document.querySelector('#done');
 
 
-let sortedTodos = todos.sort(function (a, b) {
 
-	if (a.description >b.description) {return +1}
-	else if (a.description < b.description) {return -1};
-}); 
-
-let first = sortedTodos.forEach(function(todo) {
+let lista = todos.forEach(function(todo) {
 
 todoEl = document.createElement('li');
 
 todoEl.innerHTML = todo.description;
 
-todosEl.append(todoEl)});
-
-
-let doneEl = document.querySelector('#done');
+undoneEl.append(todoEl)});
 
 
 
-const renderToDoList = function (todo) {
+const renderList = function (todo) {
 
-	 todoEl = document.createElement('li');
-		todoEl.innerHTML = todo.description;
-		todo.completed = false;
-		todosEl.append(todoEl);
-};
+	doneEl.innerText = "";
+	undoneEl.innerText= "";
+	
+	todo.completed = !todo.completed;
+
+	  let a = todos.filter((item)=>{return item.completed ==false}).sort((itema, itemb)=>{if (itema.description>itemb.description) {return +1} else {return -1}});
+	  
+	  a.forEach((item)=> {todoEl = document.createElement('li');
+	 todoEl.innerText = item.description;
+	 undoneEl.append(todoEl)})
+
 		
 
-	
-		//doneEl.remove(todoEl);*/
-		
+	 let b = todos.filter((thing)=>{return thing.completed ==true}).sort((itema, itemb)=>{if(itema.description>itemb.description) {return +1}else{return -1}});
 
-const renderDoneList = function (todo) {
+	 b.forEach((thing) => {todoEl = document.createElement('li');
+	 todoEl.innerText = thing.description;
+	 doneEl.append(todoEl);})};
 	
-	 nytodoEl = document.createElement('li');
-	nytodoEl.innerHTML = todo.description;
-	todo.completed =true;
-	doneEl.append(nytodoEl);
-	};
-
-			//todosEl.remove(todoEl);
 		
 
 
 // Add click handler for updating completed status
 todosEl.addEventListener('click', function(e) {
 	
-	 content = e.target.innerText;
-	 e.target.remove();
-	  found = sortedTodos.find(function(todo) {
-		if (todo.description = content)
-		{return true;}
-		else {return false;}})
-	
-	renderDoneList(found)});
+	if (e.target.tagName === "LI") {
+		// find clicked todo
+		const todo = todos.find(todo => todo.description === e.target.innerText);
 
-doneEl.addEventListener('click', function(e) {
-	
-	let content = e.target.innerText;
-	e.target.remove();
-	let found = sortedTodos.find(function(todo) {
-	if (todo.description = content)
-	{return true;}
-	else {return false;}})
+		// update completed status for this todo item
+		//todo.completed = !todo.completed;
+
+		// save updated todo list
 		
-	renderToDoList(found)});
+
+		// render the updated todo list to DOM
+		renderList(todo);
+	}});
+	    
+	
+
+
 
 
 
@@ -115,5 +106,5 @@ createNewTodoButton.addEventListener('click', function() {
 	todoEl.innerHTML = newTodo.description;
 	sortedTodos.push(newTodo);
 
-	todosEl.append(todoEl);
+	undoneEl.append(todoEl);
 });
