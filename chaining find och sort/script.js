@@ -76,15 +76,9 @@ todosEl.addEventListener('click', function(e) {
 		// find clicked todo
 		const todo = todos.find(todo => todo.description === e.target.innerText);
 
-		// update completed status for this todo item
-		//todo.completed = !todo.completed;
-
-		// save updated todo list
-		
-
-		// render the updated todo list to DOM
 		renderList(todo);
-	}});
+	}
+	else {e.preventDefault()}});
 	    
 	
 
@@ -99,12 +93,13 @@ createNewTodoButton.addEventListener('click', function() {
 
 	let newTodo = {
 		description: text,
-		completed: false
+		completed: true
 	}
 
 	todoEl = document.createElement('li');
 	todoEl.innerHTML = newTodo.description;
-	sortedTodos.push(newTodo);
+	todos.push(newTodo);
 
-	undoneEl.append(todoEl);
+	renderList(newTodo);
+
 });
