@@ -1,0 +1,20 @@
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCqBkPgjstSEgdYiFum2AWJYMW0nzWR2uc",
+    authDomain: "todos-81702.firebaseapp.com",
+    databaseURL: "https://todos-81702.firebaseio.com",
+    projectId: "todos-81702",
+    storageBucket: "todos-81702.appspot.com",
+    messagingSenderId: "125746309716",
+    appId: "1:125746309716:web:e8da96fc85dcfd35eb5bc1"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
